@@ -163,6 +163,8 @@ function loadDisqus(shop){
 }
 
 function showDisqus(shop){
+  // 隐藏评论区直到加载
+  document.getElementById('disqus_thread').style.display = 'block';
   loadDisqus(shop);
 }
 
@@ -173,6 +175,7 @@ function hideDisqus(){
 
 </body>
 </html>
+
 
 
 <!-- <!DOCTYPE html>
