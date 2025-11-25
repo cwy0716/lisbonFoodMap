@@ -430,54 +430,56 @@ const categories = ["全部", ...categorySet];
 /* ========= Marker + Popup 创建 ========= */
 let markers = [];
 
+/* ========= Marker + Popup 创建 ========= */
 function createMarker(shop) {
-  let iconHtml = `<div class="custom-marker"><img src="${shop.img}"></div>`;
-  let icon = L.divIcon({
-    html: iconHtml,
-    className: "",
-    iconSize: [50, 50],
-    iconAnchor: [25, 50]
-  });
+let iconHtml = `<div class="custom-marker"><img src="${shop.img}"></div>`;
+let icon = L.divIcon({
+html: iconHtml,
+className: "",
+iconSize: [50, 50],
+iconAnchor: [25, 50]
+});
 
-  let popupHtml = `
-    <div class="popup-card">
-      <img class="popup-img" src="${shop.img}">
-      <div class="popup-title">${shop.name}</div>
-      <div class="popup-cost">${shop.cost}</div>
-      <div class="popup-address">${shop.address}</div>
-      <div style="height:8px;"></div>
+// 给每个店铺一个唯一的 Disqus 容器 ID
+let disqusId = 'disqus_thread_' + shop.name.replace(/\s/g,'_');
 
-      <div class="popup-scroll">
-        <ul class="popup-comments">
-          ${shop.desc.map(item => `<li>${item}</li>`).join("")}
-        </ul>
-      </div>
+let popupHtml = ` 
+<div class="popup-card"> 
+  <img class="popup-img" src="${shop.img}"> 
+  <div class="popup-title">${shop.name}</div> 
+  <div class="popup-cost">${shop.cost}</div> 
+  <div class="popup-address">${shop.address}</div> 
+  <div style="height:8px;"></div>
+  <div class="popup-scroll">
+    <ul class="popup-comments">
+      ${shop.desc.map(item => `<li>${item}</li>`).join("")}
+    </ul>
+  </div>
+  <div id="${disqusId}" style="margin-top:8px;"></div>
+</div>
+`;
 
-      <!-- Disqus 区域 -->
-      <div id="disqus_thread_${shop.name}" style="width:100%; min-height:150px;"></div>
-    </div>
-  `;
+let m = L.marker([shop.lat, shop.lng], { icon }).bindPopup(popupHtml);
 
-  let m = L.marker([shop.lat, shop.lng], { icon }).bindPopup(popupHtml);
+// Popup 打开时加载 Disqus
+m.on("popupopen", function() {
+// 避免重复加载
+if (!document.getElementById(disqusId).hasChildNodes()) {
+  var disqus_config = function () {
+  this.page.url = window.location.href + '#' + shop.name; // 每个餐厅唯一 URL
+  this.page.identifier = 'shop_' + shop.name;             // 每个餐厅唯一标识
+  };
+  var s = document.createElement('script');
+        s.src = 'https://lisbonFoodMap.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (document.head || document.body).appendChild(s);
+  }
+  highlightShop(shop.name);
+});
 
-  m.on("popupopen", () => {
-    // 只加载一次
-    if (!document.getElementById(`disqus_thread_${shop.name}`).dataset.loaded) {
-      var disqus_config = function () {
-        this.page.url = window.location.href;  // 同一页面
-        this.page.identifier = `shop-${shop.name}`; // 唯一标识
-      };
-      var d = document, s = d.createElement('script');
-      s.src = 'https://lisbonFoodMap.disqus.com/embed.js'; // 改成你的 shortname
-      s.setAttribute('data-timestamp', +new Date());
-      d.body.appendChild(s);
-      document.getElementById(`disqus_thread_${shop.name}`).dataset.loaded = true;
-    }
-  });
-
-  m.on("click", () => highlightShop(shop.name));
-  return m;
+return m;
 }
+
 
 
 shops.sort((a,b) => a.name.localeCompare(b.name,'zh-Hans'));
