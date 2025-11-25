@@ -28,6 +28,7 @@
   .popup-scroll {max-height:70px;overflow-y:auto;padding-right:6px;}
   .popup-comments {margin:0;padding-left:18px;font-size:14px;color:#444;}
   .popup-comments li {margin-bottom:6px;line-height:1.4;}
+  #disqus_thread {margin-top:12px; display:none;}
   @media (max-width:750px){#container{flex-direction:column;}#sidebar{width:100%;height:40%;border-left:none;border-top:1px solid #ddd;}#map{height:60%;}}
 </style>
 
@@ -47,6 +48,8 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
+var disqus_shortname = "lisbonfoodmap"; // 替换成你在 Disqus 的网站名
+
 /* ========= 地图初始化 ========= */
 var map = L.map("map").setView([38.7368, -9.1424], 13);
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19}).addTo(map);
@@ -90,6 +93,7 @@ categories.forEach(cat=>{
     document.querySelectorAll(".cat-btn").forEach(b=>b.classList.remove("active"));
     btn.classList.add("active");
     updateDisplay();
+    hideDisqus();
   };
   catBar.appendChild(btn);
 });
@@ -132,26 +136,12 @@ function updateDisplay(){
 }
 updateDisplay();
 
-/* ========= Disqus 评论 ========= */
-function showDisqus(shop){
-  window.location.hash = shop.name.replace(/\s/g,'_');
-  if(window.DISQUS){
-    DISQUS.reset({
-      reload:true,
-      config:function(){
-        this.page.url = window.location.href;
-        this.page.identifier = 'shop_'+shop.name;
-      }
-    });
-  }
-}
-
+/* ========= Disqus 评论功能 ========= */
 function loadDisqus(shop){
-  var disqus_shortname = "lisbonfoodmap"; // 你的 Disqus 网站名
   var disqus_identifier = 'shop_' + shop.name.replace(/\s/g,'_');
   var disqus_url = window.location.href + '#' + disqus_identifier;
+  document.getElementById('disqus_thread').style.display = 'block';
 
-  // 如果 Disqus 已经存在，则用 reset 方法刷新
   if(window.DISQUS){
     DISQUS.reset({
       reload:true,
@@ -161,12 +151,10 @@ function loadDisqus(shop){
       }
     });
   } else {
-    // 创建配置函数
     window.disqus_config = function () {
       this.page.identifier = disqus_identifier;
       this.page.url = disqus_url;
     };
-    // 动态加载 Disqus 脚本
     var d=document,s=d.createElement('script');
     s.src='https://' + disqus_shortname + '.disqus.com/embed.js';
     s.setAttribute('data-timestamp',+new Date());
@@ -174,16 +162,17 @@ function loadDisqus(shop){
   }
 }
 
-// 然后在点击 Marker 或列表项时调用：
 function showDisqus(shop){
   loadDisqus(shop);
+}
+
+function hideDisqus(){
+  document.getElementById('disqus_thread').style.display = 'none';
 }
 </script>
 
 </body>
 </html>
-
-
 
 
 <!-- <!DOCTYPE html>
