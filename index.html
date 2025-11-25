@@ -107,10 +107,28 @@
     font-size: 14px;
     color: #444;
   }
-  .popup-desc {
+  /* .popup-desc {
     font-size: 14px;
     color: #444;
     margin-top: 6px;
+  } */
+
+  .popup-comments {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 14px;
+    color: #444;
+  }
+
+  .popup-comments li {
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  .popup-scroll {
+    max-height: 70px;
+    overflow-y: auto;
+    padding-right: 6px;
   }
 
   /* 手机模式：右侧栏下移 */
@@ -158,29 +176,29 @@ const shops = [
     categories: ["日料", "自助"],
     cost: "午餐16.9€ 晚餐22.9€",
     address: "Passeio das Tágides 2.25, 1990-221 Lisboa",
-    desc: "经常去的店，环境不错，品类挺多的，甜虾有点腥。",
+    desc: ["经常去的店，环境不错，品类挺多的，甜虾有点腥。"],
     img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/e4/55/b2/caption.jpg?w=900&h=500&s=1"
   },
-  {
-    name: "Ha Noi Xua",
-    lat: 38.7359274102392,
-    lng: -9.149589578721171,
-    categories: ["越南"],
-    cost: "15-20€",
-    address: "Av. João Crisóstomo 47C, 1050-066 Lisboa",
-    desc: "炸鸡翅一般，有鸭血的那个米粉肉超多。推荐炸豆腐和豆腐布丁，布丁奶味十足。",
-    img: "https://tb-static.uber.com/prod/image-proc/processed_images/151dc3dbc3309ab24d654070491bcd33/30be7d11a3ed6f6183354d1933fbb6c7.jpeg"
-  },
-  {
-    name: "Seoul K BBQ",
-    lat: 38.738646818955196,
-    lng: -9.150558922367713,
-    categories: ["烤肉", "自助"],
-    cost: "午餐16.95€ 晚餐18.95€",
-    address: "Av. Elias Garcia 147A, 1050-102 Lisboa",
-    desc: "便宜，菜品种类挺多的，但这个价格也别要求肉超优质了，反正我吃着挺好。有集点卡，吃九次送一次。",
-    img: "https://media.timeout.com/images/106040559/image.webp"
-  },
+  // {
+  //   name: "Ha Noi Xua",
+  //   lat: 38.7359274102392,
+  //   lng: -9.149589578721171,
+  //   categories: ["越南"],
+  //   cost: "15-20€",
+  //   address: "Av. João Crisóstomo 47C, 1050-066 Lisboa",
+  //   desc: "炸鸡翅一般，有鸭血的那个米粉肉超多。推荐炸豆腐和豆腐布丁，布丁奶味十足。",
+  //   img: "https://tb-static.uber.com/prod/image-proc/processed_images/151dc3dbc3309ab24d654070491bcd33/30be7d11a3ed6f6183354d1933fbb6c7.jpeg"
+  // },
+  // {
+  //   name: "Seoul K BBQ",
+  //   lat: 38.738646818955196,
+  //   lng: -9.150558922367713,
+  //   categories: ["烤肉", "自助"],
+  //   cost: "午餐16.95€ 晚餐18.95€",
+  //   address: "Av. Elias Garcia 147A, 1050-102 Lisboa",
+  //   desc: "便宜，菜品种类挺多的，但这个价格也别要求肉超优质了，反正我吃着挺好。有集点卡，吃九次送一次。",
+  //   img: "https://media.timeout.com/images/106040559/image.webp"
+  // },
   {
     name: "Eat Thai",
     lat: 38.76327252017592,
@@ -188,119 +206,220 @@ const shops = [
     categories: ["泰餐"],
     cost: "谷歌人均15-20€，但我感觉还要贵一些",
     address: "Av. Mediterrâneo 6H, 1990-155 Lisboa",
-    desc: "泰国人开的，很正宗，去了好多次了。</br> 猪皮脆脆的。生腌虾很新鲜，有点辣。甜品芒果糯米饭必点。可惜没有生腌三文鱼……</br> 烤猪肉不推荐，硬。",
+    desc: ["泰国人开的，很正宗，去了好多次了。猪皮脆脆的。生腌虾很新鲜，有点辣。甜品芒果糯米饭必点。可惜没有生腌三文鱼…… 烤猪肉不推荐，硬。"],
     img: "https://cdn.thefork.com/tf-lab/image/upload/w_500,h_500,c_fill,q_auto,f_auto,g_auto:subject/restaurant/5f910d76-8da2-4dbc-aaeb-9f5399d25d6d/f6b251fb-33ce-4355-94f6-5163cfa33e00.jpg"
   },
-  {
-    name: "Han Table Barbecue",
-    lat: 38.77013664524855,
-    lng: -9.092501991172153,
-    categories: ["烤肉"],
-    cost: "",
-    address: "R. da Pimenta 5, 1990-280 Lisboa",
-    desc: "只堂食物过一次，谷歌评分挺高的。打包过几次炒年糕、泡菜、炒杂菜，好吃。",
-    img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/e8/70/8d/caption.jpg?w=1000&h=-1&s=1"
-  },
-  {
-    name: "Friendship Korean BBQ",
-    lat: 38.77116070923121, 
-    lng: -9.095761594888865,
-    categories: ["烤肉"],
-    cost: "15-25€",
-    address: "Alameda dos Oceanos 61A, 1990-208 Lisboa",
-    desc: "聚会常去，便宜，好吃。",
-    img: "https://scontent.flis5-3.fna.fbcdn.net/v/t51.75761-15/499133868_17982591860821941_9209076530450974233_n.jpg?stp=dst-jpegr_s1080x2048_tt6&_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_ohc=8qqZ4hDsBQQQ7kNvwH53Xcb&_nc_oc=AdmfxKGS1agUOgsKHLyBT6cKfBzS3B9KPYITIqLy-3Hq0V7ICF_lEtJ0sbVbC6xzkm27k7QyTusoRcCZ7a5Bedjk&_nc_zt=23&se=-1&_nc_ht=scontent.flis5-3.fna&_nc_gid=5MYxj2f0JEolsvh5FPAy-w&oh=00_AfijpJkude6tZGkUtXlWF-CdCuEkhtMekUrFw0-E6VIfcw&oe=6926D79F"
-  },
-  {
-    name: "TOKYO BBQ HOUSE",
-    lat: 38.767663684235806, 
-    lng: -9.0924139441435,
-    categories: ["烤肉", "自助"],
-    cost: "午餐21.9€ 晚餐23.9€",
-    address: "lisboa Passeio das Tágides, 1990-280",
-    desc: "王子文去打过卡。晚餐加饮料差不多25€，摆盘精致，肉种类很多，大多是不带调味的。感觉有些肉是冷冻的，但这个价格还要啥自行车，很实惠了。我不吃牛舌，但朋友说葱牛舌很好吃。推荐台式香肠，带菠萝的肉，寿喜烧。不推荐关东煮，味道怪怪的。",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdyphILAqiTyjG8yMbjStKAMNdtNl4BTVKRQ&s"
-  },
-  {
-    name: "Sea Palace",
-    lat: 38.76765866606877, 
-    lng: -9.092234338029279,
-    categories: ["中餐"],
-    cost: "",
-    address: "Passeio das Tágides Lote 2.25.01, Parque das Nações, 1990-280",
-    desc: "",
-    img: "https://lifecooler.com/files/registos/imagens/451632/361255.jpg"
-  },
-  {
-    name: "The Old House",
-    lat: 38.77041534775769, 
-    lng: -9.092427262335926,
-    categories: ["中餐"],
-    cost: "",
-    address: "R. da Pimenta 9, 1990-254 Lisboa",
-    desc: "高端商务餐厅，大使馆的一些活动都会在那里办。味道不错，价格贵。",
-    img: "https://tb-static.uber.com/prod/image-proc/processed_images/b90dd3a8e1b5d37b66c1945ab0f6b491/16bb0a3ab8ea98cfe8906135767f7bf4.jpeg"
-  },
-  {
-    name: "Sushicome PQ.Nações (Sul)",
-    lat: 38.76465738981018, 
-    lng: -9.096445699772282,
-    categories: ["日料", "自助"],
-    cost: "晚餐17.9€",
-    address: "R. Mar do Norte 1 Loja 7, 1990-083 Lisboa",
-    desc: "凭学生卡有折扣",
-    img: "https://cdn.shopify.com/s/files/1/0669/8552/5527/files/sushicome_expo.jpg?v=1751890241"
-  },
-  {
-    name: "ZHANG LALA(Ramen Lanzhou)张拉拉兰州牛肉面",
-    lat: 38.77188697746868, 
-    lng: -9.092338606516785,
-    categories: ["中餐"],
-    cost: "10-15€",
-    address: "PT Lisboa, R. da Pimenta 63, 1990-254",
-    desc: "好吃，身边的人都很爱。",
-    img: "https://menu.restaurantguru.com/m0/menu-Restaurant-ZHANG-LALA-Ramen-Lanzhou-e7y.jpg"
-  },
-  {
-    name: "Bubble Time",
-    lat: 38.77009562092994, 
-    lng: -9.09244573068956,
-    categories: ["奶茶"],
-    cost: "4.1-6€",
-    address: "R. da Pimenta 3, 1990-254 Lisboa",
-    desc: "风景不错，老外挺喜欢的，不是很符合我的口味。",
-    img: "https://tb-static.uber.com/prod/image-proc/processed_images/531fe6a55b81b745dc576cb62902591e/c9252e6c6cd289c588c3381bc77b1dfc.jpeg"
-  },
-  {
-    name: "The Whale Tea (Parque das Nações)",
-    lat:  38.76810863062003, 
-    lng: -9.092201318155047,
-    categories: ["奶茶"],
-    cost: "5-10€",
-    address: "Passeio das Tágides, 1990-280 Lisboa",
-    desc: "好像是专门从台湾那边专门学过来的，有挺多特色饮品的。",
-    img: "https://tb-static.uber.com/prod/image-proc/processed_images/09dbefbc55d3890010fc0dc7e815f3b1/3ac2b39ad528f8c8c5dc77c59abb683d.jpeg"
-  },
-  {
-    name: "Mon Tea Portugal 萌",
-    lat: 38.76869897792993,  
-    lng: -9.099304389318869,
-    categories: ["奶茶"],
-    cost: "3.6-6€",
-    address: "Av. Aquilino Ribeiro Machado F2, 1990-084 Lisboa",
-    desc: "好喝，符合中国人的口味，超喜欢泰国奶茶。",
-    img: "https://media-cdn.tripadvisor.com/media/photo-s/1b/82/04/2c/what-about-some-waffle.jpg"
-  },
-  {
-    name: "Mr.Box Tea",
-    lat:  38.7348619486019, 
-    lng: -9.154007006074325,
-    categories: ["奶茶"],
-    cost: "3.9-5.4€",
-    address: "Av. António Augusto de Aguiar 140B, 1050-021 Lisboa",
-    desc: "",
-    img: "https://media.timeout.com/images/105825502/image.jpg"
-  },
+  // {
+  //   name: "Han Table Barbecue",
+  //   lat: 38.77013664524855,
+  //   lng: -9.092501991172153,
+  //   categories: ["烤肉"],
+  //   cost: "",
+  //   address: "R. da Pimenta 5, 1990-280 Lisboa",
+  //   desc: "只堂食物过一次，谷歌评分挺高的。打包过几次炒年糕、泡菜、炒杂菜。",
+  //   img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/e8/70/8d/caption.jpg?w=1000&h=-1&s=1"
+  // },
+  // {
+  //   name: "Friendship Korean BBQ",
+  //   lat: 38.77116070923121, 
+  //   lng: -9.095761594888865,
+  //   categories: ["烤肉"],
+  //   cost: "15-25€",
+  //   address: "Alameda dos Oceanos 61A, 1990-208 Lisboa",
+  //   desc: "聚会常去，便宜，好吃。",
+  //   img: "https://scontent.flis5-3.fna.fbcdn.net/v/t51.75761-15/499133868_17982591860821941_9209076530450974233_n.jpg?stp=dst-jpegr_s1080x2048_tt6&_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_ohc=8qqZ4hDsBQQQ7kNvwH53Xcb&_nc_oc=AdmfxKGS1agUOgsKHLyBT6cKfBzS3B9KPYITIqLy-3Hq0V7ICF_lEtJ0sbVbC6xzkm27k7QyTusoRcCZ7a5Bedjk&_nc_zt=23&se=-1&_nc_ht=scontent.flis5-3.fna&_nc_gid=5MYxj2f0JEolsvh5FPAy-w&oh=00_AfijpJkude6tZGkUtXlWF-CdCuEkhtMekUrFw0-E6VIfcw&oe=6926D79F"
+  // },
+  // {
+  //   name: "TOKYO BBQ HOUSE",
+  //   lat: 38.767663684235806, 
+  //   lng: -9.0924139441435,
+  //   categories: ["烤肉", "自助"],
+  //   cost: "午餐21.9€ 晚餐23.9€",
+  //   address: "lisboa Passeio das Tágides, 1990-280",
+  //   desc: "王子文去打过卡。晚餐加饮料差不多25€，摆盘精致，肉种类很多，大多是不带调味的。感觉有些肉是冷冻的，但这个价格还要啥自行车，很实惠了。我不吃牛舌，但朋友说葱牛舌很好吃。推荐台式香肠，带菠萝的肉，寿喜烧。不推荐关东煮，味道怪怪的。",
+  //   img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdyphILAqiTyjG8yMbjStKAMNdtNl4BTVKRQ&s"
+  // },
+  // {
+  //   name: "Sea Palace",
+  //   lat: 38.76765866606877, 
+  //   lng: -9.092234338029279,
+  //   categories: ["中餐"],
+  //   cost: "",
+  //   address: "Passeio das Tágides Lote 2.25.01, Parque das Nações, 1990-280",
+  //   desc: "",
+  //   img: "https://lifecooler.com/files/registos/imagens/451632/361255.jpg"
+  // },
+  // {
+  //   name: "The Old House",
+  //   lat: 38.77041534775769, 
+  //   lng: -9.092427262335926,
+  //   categories: ["中餐"],
+  //   cost: "",
+  //   address: "R. da Pimenta 9, 1990-254 Lisboa",
+  //   desc: "高端商务餐厅，大使馆的一些活动都会在那里办。味道不错，价格贵。",
+  //   img: "https://tb-static.uber.com/prod/image-proc/processed_images/b90dd3a8e1b5d37b66c1945ab0f6b491/16bb0a3ab8ea98cfe8906135767f7bf4.jpeg"
+  // },
+  // {
+  //   name: "Sushicome PQ.Nações (Sul)",
+  //   lat: 38.76465738981018, 
+  //   lng: -9.096445699772282,
+  //   categories: ["日料", "自助"],
+  //   cost: "晚餐17.9€",
+  //   address: "R. Mar do Norte 1 Loja 7, 1990-083 Lisboa",
+  //   desc: "凭学生卡有折扣",
+  //   img: "https://cdn.shopify.com/s/files/1/0669/8552/5527/files/sushicome_expo.jpg?v=1751890241"
+  // },
+  // {
+  //   name: "ZHANG LALA(Ramen Lanzhou)张拉拉兰州牛肉面",
+  //   lat: 38.77188697746868, 
+  //   lng: -9.092338606516785,
+  //   categories: ["中餐"],
+  //   cost: "10-15€",
+  //   address: "PT Lisboa, R. da Pimenta 63, 1990-254",
+  //   desc: "身边的人都很爱。",
+  //   img: "https://menu.restaurantguru.com/m0/menu-Restaurant-ZHANG-LALA-Ramen-Lanzhou-e7y.jpg"
+  // },
+  // {
+  //   name: "Bubble Time",
+  //   lat: 38.77009562092994, 
+  //   lng: -9.09244573068956,
+  //   categories: ["奶茶"],
+  //   cost: "4.1-6€",
+  //   address: "R. da Pimenta 3, 1990-254 Lisboa",
+  //   desc: "风景不错，老外挺喜欢的，不是很符合我的口味。",
+  //   img: "https://tb-static.uber.com/prod/image-proc/processed_images/531fe6a55b81b745dc576cb62902591e/c9252e6c6cd289c588c3381bc77b1dfc.jpeg"
+  // },
+  // {
+  //   name: "The Whale Tea (Parque das Nações)",
+  //   lat:  38.76810863062003, 
+  //   lng: -9.092201318155047,
+  //   categories: ["奶茶"],
+  //   cost: "5-10€",
+  //   address: "Passeio das Tágides, 1990-280 Lisboa",
+  //   desc: "好像是专门从台湾那边专门学过来的，有挺多特色饮品。",
+  //   img: "https://tb-static.uber.com/prod/image-proc/processed_images/09dbefbc55d3890010fc0dc7e815f3b1/3ac2b39ad528f8c8c5dc77c59abb683d.jpeg"
+  // },
+  // {
+  //   name: "Mon Tea Portugal 萌",
+  //   lat: 38.76869897792993,  
+  //   lng: -9.099304389318869,
+  //   categories: ["奶茶"],
+  //   cost: "3.6-6€",
+  //   address: "Av. Aquilino Ribeiro Machado F2, 1990-084 Lisboa",
+  //   desc: "好喝，符合中国人的口味，超喜欢泰国奶茶。",
+  //   img: "https://media-cdn.tripadvisor.com/media/photo-s/1b/82/04/2c/what-about-some-waffle.jpg"
+  // },
+  // {
+  //   name: "Mr.Box Tea",
+  //   lat:  38.7348619486019, 
+  //   lng: -9.154007006074325,
+  //   categories: ["奶茶"],
+  //   cost: "3.9-5.4€",
+  //   address: "Av. António Augusto de Aguiar 140B, 1050-021 Lisboa",
+  //   desc: "没去过几次，唯一一次有印象的是去打剧本杀，喝的抹茶星冰乐，正常糖会比较甜。",
+  //   img: "https://media.timeout.com/images/105825502/image.jpg"
+  // },
+  // {
+  //   name: "Sabor Oriental",
+  //   lat:  38.74086991837764, 
+  //   lng: -9.168374962337698,
+  //   categories: ["中餐"],
+  //   cost: "10-15€",
+  //   address: "Estr. de Benfica 211, 1500-071 Lisboa",
+  //   desc: "正宗东北菜，常点毛血旺、锅包肉、蒜香排骨、地三鲜，吃过一次大拉皮惊为天人，但是很稀有，不一定有，要提前问。现在感觉整家店味道变了，锅包肉酱没那么多说不上来，没有一开始好吃了。不推荐东北麻辣烫。",
+  //   img: "https://media.timeout.com/images/106162947/image.jpg"
+  // },
+  // {
+  //   name: "OXYGEN bubble tea",
+  //   lat:  38.74206842458511, 
+  //   lng: -9.131932793722351,
+  //   categories: ["奶茶"],
+  //   cost: "",
+  //   address: "Alameda Dom Afonso Henriques 56A, 1900-182 Lisboa",
+  //   desc: "原味大杯珍珠奶茶4.5€，应该是几家奶茶店里最便宜的了。在alameda广场边上，室内没什么位置，外面有位置。",
+  //   img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3IYmdHK9_TQiiCGJe2mKr2QCGaj-dGuS8FQ&s"
+  // },
+  // {
+  //   name: "La Parrilla",
+  //   lat:  38.77282671963326, 
+  //   lng: -9.097218729846695,
+  //   categories: ["西餐"],
+  //   cost: "10-15€",
+  //   address: "Centro Comercial Vasco da Gama, Av. Dom João II Piso 2, Loja 2045, 1990-083 Lisboa",
+  //   desc: "在vdg商场里面，经常去吃的店，每次都点黑猪肉套餐！",
+  //   img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/c2/9a/97/la-parrilla.jpg?w=1200&h=1200&s=1"
+  // },
+  // {
+  //   name: "Alentejo Grill House",
+  //   lat:  38.76753841503072, 
+  //   lng: -9.09720973349988,
+  //   categories: ["葡餐", "西餐"],
+  //   cost: "10-15€",
+  //   address: "Centro Comercial Vasco da Gama, Av. Dom João II Piso 2, 1990-083 Lisboa",
+  //   desc: "在vdg商场里面，就常见的一人一盘的类型，不爱吃。",
+  //   img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/36/9a/90/photo0jpg.jpg?w=900&h=500&s=1"
+  // },
+  // {
+  //   name: "Bifanas de Vendas Novas",
+  //   lat:  38.77385644806343,  
+  //   lng: -9.095570629903445,
+  //   categories: ["葡餐", "西餐"],
+  //   cost: "10-15€",
+  //   address: "Centro Comercial Vasco da Gama, Av. Dom João II Piso 2, 1990-083 Lisboa",
+  //   desc: "在vdg商场里面，葡式快餐，我都点的牛排，肉薄薄干干的，一般。",
+  //   img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/06/f7/4b/photo0jpg.jpg?w=1200&h=-1&s=1"
+  // },
+  // {
+  //   name: "ZHANGLALA CHINESE BBQ张拉拉西北碳烤(刀削面)",
+  //   lat:  38.77276111011386, 
+  //   lng: -9.092231313434464,
+  //   categories: ["中餐", "烧烤"],
+  //   cost: "",
+  //   address: "R. da Pimenta 78, 1990-048 Lisboa",
+  //   desc: "",
+  //   img: ""
+  // },
+  // {
+  //   name: "Bafangke Restaurant",
+  //   lat:  38.737533751886716, 
+  //   lng: -9.132881722510286,
+  //   categories: ["中餐", "烧烤"],
+  //   cost: "",
+  //   address: "Alameda Dom Afonso Henriques 29B, 1900-221 Lisboa",
+  //   desc: "只去那里吃过烧烤，品类挺多的。不推荐炒粉干，很干。",
+  //   img: ""
+  // },
+  // {
+  //   name: "Istanbul kebab & pizzas",
+  //   lat:  38.73795862813405, 
+  //   lng: -9.133656662337831,
+  //   categories: ["快餐"],
+  //   cost: "5-10€",
+  //   address: "Av. Alm. Reis 190A, 1000-055 Lisboa",
+  //   desc: "不一样的kebab，比别的kebab好吃。",
+  //   img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAvO51hEH7ldG_y0CmERbtCwwd_nSKZRO7Kg&s"
+  // },
+  // {
+  //   name: "Frango da Expo Gare do Oriente",
+  //   lat:  38.76777464495861, 
+  //   lng: -9.099560162336038,
+  //   categories: ["快餐"],
+  //   cost: "5-10€",
+  //   address: "Gare do Oriente loja, G218, 1990-233 Lisboa",
+  //   desc: "传说中的黑人烤鸡，因为黑人爱去因此得名。价格实惠，几乎每次去都排队。",
+  //   img: "https://www.mygon.com/ImageAdapterV2/shop/9824/shopimage_2.jpg?width=600&height=315"
+  // },
+  // {
+  //   name: "",
+  //   lat:  , 
+  //   lng: ,
+  //   categories: ["中餐"],
+  //   cost: "€",
+  //   address: "",
+  //   desc: "",
+  //   img: ""
+  // },
+  
 ];
 
 /* ========= 自动生成分类按钮 ========= */
@@ -327,14 +446,39 @@ function createMarker(shop) {
       <div class="popup-cost">${shop.cost}</div>
       <div class="popup-address">${shop.address}</div>
       <div style="height:8px;"></div>
-      <div class="popup-desc">${shop.desc}</div>
+
+      <div class="popup-scroll">
+        <ul class="popup-comments">
+          ${shop.desc.map(item => `<li>${item}</li>`).join("")}
+        </ul>
+      </div>
+
+      <!-- Disqus 区域 -->
+      <div id="disqus_thread_${shop.name}" style="width:100%; min-height:150px;"></div>
     </div>
   `;
 
   let m = L.marker([shop.lat, shop.lng], { icon }).bindPopup(popupHtml);
+
+  m.on("popupopen", () => {
+    // 只加载一次
+    if (!document.getElementById(`disqus_thread_${shop.name}`).dataset.loaded) {
+      var disqus_config = function () {
+        this.page.url = window.location.href;  // 同一页面
+        this.page.identifier = `shop-${shop.name}`; // 唯一标识
+      };
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lisbonFoodMap.disqus.com/embed.js'; // 改成你的 shortname
+      s.setAttribute('data-timestamp', +new Date());
+      d.body.appendChild(s);
+      document.getElementById(`disqus_thread_${shop.name}`).dataset.loaded = true;
+    }
+  });
+
   m.on("click", () => highlightShop(shop.name));
   return m;
 }
+
 
 shops.sort((a,b) => a.name.localeCompare(b.name,'zh-Hans'));
 shops.forEach(s => {
